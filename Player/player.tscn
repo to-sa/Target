@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://h0vg8bbh0s2s"]
+
+[ext_resource type="Script" uid="uid://ccrwylged1xrd" path="res://Player/Player.cs" id="1_k53q1"]
+[ext_resource type="Texture2D" uid="uid://dx14je43psio7" path="res://Assets/Characters/green_character.png" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://cem4t2wcq1nys" path="res://Assets/Characters/green_hand.png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://pxr4reigdry7" path="res://Assets/Items/weapon_bow.png" id="3_btcbx"]
+[ext_resource type="Texture2D" uid="uid://ydrx53txov1m" path="res://Assets/Items/weapon_bow_arrow.png" id="4_gwnis"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gwnis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_btcbx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gwnis")
+}],
+"loop": true,
+"name": &"draw",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
+radius = 31.5753
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_k53q1")
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("1_l8h54")
+
+[node name="LeftArm" type="Sprite2D" parent="Body"]
+position = Vector2(85, 0)
+rotation = 1.5708
+texture = ExtResource("2_4ntmi")
+
+[node name="Weapons" type="AnimatedSprite2D" parent="Body/LeftArm"]
+z_index = -5
+sprite_frames = SubResource("SpriteFrames_gwnis")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_l8h54")
