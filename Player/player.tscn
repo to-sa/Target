@@ -12,7 +12,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_btcbx")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -20,7 +20,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_gwnis")
 }],
-"loop": true,
+"loop": false,
 "name": &"draw",
 "speed": 5.0
 }]
@@ -42,6 +42,14 @@ texture = ExtResource("2_4ntmi")
 [node name="Weapons" type="AnimatedSprite2D" parent="Body/LeftArm"]
 z_index = -5
 sprite_frames = SubResource("SpriteFrames_gwnis")
+animation = &"draw"
+
+[node name="FirePosition" type="Marker2D" parent="Body/LeftArm"]
+rotation = -1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_l8h54")
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
