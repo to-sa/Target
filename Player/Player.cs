@@ -10,6 +10,8 @@ public partial class Player : Area2D
     private Marker2D _spawnPosition;
     private Timer _fireRate;
     private AnimatedSprite2D _weaponSprite;
+    private AudioStreamPlayer2D _drawSound;
+
     private bool _canFire = true;
 
     public override void _Ready()
@@ -18,6 +20,8 @@ public partial class Player : Area2D
 
         _weaponSprite = GetNode<AnimatedSprite2D>("Body/LeftArm/Weapons");
         _weaponSprite.AnimationFinished += BowAnimation;
+
+        _drawSound = GetNode<AudioStreamPlayer2D>("FireSound"); 
 
         _fireRate = GetNode<Timer>("FireRate");
         _fireRate.Timeout += CanFireTimeout;
@@ -46,6 +50,7 @@ public partial class Player : Area2D
         GetTree().CurrentScene.AddChild(newArrow);
         newArrow.GlobalPosition = _spawnPosition.GlobalPosition;
         newArrow.GlobalRotation = _spawnPosition.GlobalRotation;
+        _drawSound.Play();
 
         _canFire = false;
         _fireRate.Start();

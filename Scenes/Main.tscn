@@ -1,37 +1,98 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=11 format=3 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://bpd1f1w75jgmo" path="res://Scenes/Barrel/Barrel.tscn" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://bj8cfvsb6rbre" path="res://Assets/Sounds/SoundManager.tscn" id="3_rgh2o"]
+[ext_resource type="AudioStream" uid="uid://cy12fbwrumick" path="res://Assets/Sounds/Audio/impactWood_medium_003.ogg" id="4_pbw6q"]
+[ext_resource type="Script" uid="uid://bkftrkk2jryt8" path="res://Assets/Sounds/SoundManager.cs" id="4_v1gob"]
+[ext_resource type="AudioStream" uid="uid://du7m5ehpryjx8" path="res://Assets/Sounds/Audio/impactSoft_heavy_004.ogg" id="6_jw32o"]
+[ext_resource type="Script" uid="uid://hsmnjj15akm3" path="res://Scripts/HUD.cs" id="8_50glp"]
 
 [sub_resource type="Curve2D" id="Curve2D_idj7w"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 720, 1280, 0, 0, 0, 0, 0, 1280, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -276, -68, 0, 0, 0, 0, 843, -118, 0, 0, 0, 0, 855, 1360, 0, 0, 0, 0, -295, 1341, 0, 0, 0, 0, -273, -60, 0, 0, 0, 0, -276, -68)
 }
-point_count = 5
+point_count = 6
 
-[node name="Main" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_jw32o"]
+font_size = 68
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_idj7w")
 MobScene = ExtResource("2_kln2b")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -259.0
-offset_top = -189.0
-offset_right = 920.0
-offset_bottom = 1525.0
-color = Color(0.351497, 0.474452, 0.739697, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="Player" parent="." instance=ExtResource("1_r150o")]
+[node name="SoundManager" parent="." node_paths=PackedStringArray("HitSound", "PlayerHitSound") instance=ExtResource("3_rgh2o")]
+script = ExtResource("4_v1gob")
+HitSound = NodePath("BarrelHitSound")
+PlayerHitSound = NodePath("PlayerHitSound")
+
+[node name="BarrelHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
+stream = ExtResource("4_pbw6q")
+
+[node name="PlayerHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
+stream = ExtResource("6_jw32o")
+
+[node name="PlayerPosition" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player" parent="PlayerPosition" instance=ExtResource("1_r150o")]
+unique_name_in_owner = true
 z_index = 5
-position = Vector2(486, 549)
+position = Vector2(20, 20)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 2.0
+autostart = true
 
 [node name="MobPath" type="Path2D" parent="."]
+position = Vector2(45, 16)
 curve = SubResource("Curve2D_idj7w")
 
 [node name="SpawnLocation" type="PathFollow2D" parent="MobPath"]
+unique_name_in_owner = true
+position = Vector2(-276, -68)
+rotation = -0.0446531
 
-[node name="Barrel" parent="." instance=ExtResource("2_kln2b")]
-position = Vector2(170, 234)
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("8_50glp")
+
+[node name="ScoreDisplay" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -231.5
+offset_right = 231.5
+offset_bottom = 184.0
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_jw32o")
+horizontal_alignment = 1
+vertical_alignment = 1
