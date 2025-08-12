@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpd1f1w75jgmo"]
+
+[ext_resource type="Texture2D" uid="uid://coij15rtoomko" path="res://Assets/tilesheet.png" id="1_743re"]
+[ext_resource type="Script" uid="uid://bcwqy1o4k45b6" path="res://Scenes/Barrel/Barrel.cs" id="1_iifeo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqfqo"]
+atlas = ExtResource("1_743re")
+region = Rect2(1280, 896, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_743re"]
+atlas = ExtResource("1_743re")
+region = Rect2(1408, 384, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ol7c6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqfqo")
+}],
+"loop": false,
+"name": &"box",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_743re")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_743re"]
+radius = 27.074
+
+[node name="Barrel" type="Area2D"]
+z_index = 10
+texture_filter = 1
+script = ExtResource("1_iifeo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ol7c6")
+animation = &"box"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_743re")
+
+[node name="VisibleOnScreen" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreen" to="." method="OnScreenExited"]

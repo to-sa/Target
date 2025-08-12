@@ -1,8 +1,8 @@
 using Godot;
 using System;
 
-namespace Target.Player;
-
+namespace Target.User;
+[GlobalClass]
 public partial class Player : Area2D
 {
     private PackedScene _arrowScene = GD.Load<PackedScene>("Weapons/Arrow.tscn");
@@ -27,7 +27,9 @@ public partial class Player : Area2D
     public override void _Input(InputEvent @event)
     {
         if (@event is not InputEventScreenTouch touch) return;
+
         if (!_canFire) return;
+
         ReadyBow(touch.Position);
     }
 
@@ -58,6 +60,5 @@ public partial class Player : Area2D
     {
         _weaponSprite.Play("draw");
     }
-
 
 }
