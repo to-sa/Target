@@ -1,22 +1,31 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=16 format=3 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://bpd1f1w75jgmo" path="res://Scenes/Barrel/Barrel.tscn" id="2_kln2b"]
 [ext_resource type="PackedScene" uid="uid://bj8cfvsb6rbre" path="res://Assets/Sounds/SoundManager.tscn" id="3_rgh2o"]
-[ext_resource type="AudioStream" uid="uid://cy12fbwrumick" path="res://Assets/Sounds/Audio/impactWood_medium_003.ogg" id="4_pbw6q"]
 [ext_resource type="Script" uid="uid://bkftrkk2jryt8" path="res://Assets/Sounds/SoundManager.cs" id="4_v1gob"]
-[ext_resource type="AudioStream" uid="uid://du7m5ehpryjx8" path="res://Assets/Sounds/Audio/impactSoft_heavy_004.ogg" id="6_jw32o"]
+[ext_resource type="AudioStream" uid="uid://cgxcw2231ws8k" path="res://Assets/Sounds/Audio/impactWood_medium_004.ogg" id="5_bmxlf"]
+[ext_resource type="AudioStream" uid="uid://bi75bdjkpc04i" path="res://Assets/Sounds/Audio/impactPunch_medium_003.ogg" id="6_bmxlf"]
+[ext_resource type="AudioStream" uid="uid://ddivkropj0r82" path="res://Assets/Sounds/Audio/impactWood_light_004.ogg" id="7_grg3l"]
 [ext_resource type="Script" uid="uid://hsmnjj15akm3" path="res://Scripts/HUD.cs" id="8_50glp"]
+[ext_resource type="AudioStream" uid="uid://ko74w1lojvn8" path="res://Assets/Sounds/Audio/impactPunch_heavy_003.ogg" id="8_frkhe"]
+[ext_resource type="FontFile" uid="uid://doj2imcpb52c4" path="res://Assets/Font/Kenney Future.ttf" id="11_4kpch"]
+[ext_resource type="PackedScene" uid="uid://b2v4vusylgxha" path="res://Scenes/Heart.tscn" id="11_grg3l"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1p5hy"]
+random_volume_offset_db = 2.51
+streams_count = 4
+stream_0/stream = ExtResource("5_bmxlf")
+stream_1/stream = ExtResource("6_bmxlf")
+stream_2/stream = ExtResource("7_grg3l")
+stream_3/stream = ExtResource("8_frkhe")
 
 [sub_resource type="Curve2D" id="Curve2D_idj7w"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -276, -68, 0, 0, 0, 0, 843, -118, 0, 0, 0, 0, 855, 1360, 0, 0, 0, 0, -295, 1341, 0, 0, 0, 0, -273, -60, 0, 0, 0, 0, -276, -68)
-}
-point_count = 6
 
 [sub_resource type="LabelSettings" id="LabelSettings_jw32o"]
-font_size = 68
+font = ExtResource("11_4kpch")
+font_size = 88
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -28,6 +37,13 @@ grow_vertical = 2
 script = ExtResource("1_idj7w")
 MobScene = ExtResource("2_kln2b")
 
+[node name="SoundManager" parent="." node_paths=PackedStringArray("HitSound") instance=ExtResource("3_rgh2o")]
+script = ExtResource("4_v1gob")
+HitSound = NodePath("BarrelHitSound")
+
+[node name="BarrelHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
+stream = SubResource("AudioStreamRandomizer_1p5hy")
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -35,18 +51,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="SoundManager" parent="." node_paths=PackedStringArray("HitSound", "PlayerHitSound") instance=ExtResource("3_rgh2o")]
-script = ExtResource("4_v1gob")
-HitSound = NodePath("BarrelHitSound")
-PlayerHitSound = NodePath("PlayerHitSound")
-
-[node name="BarrelHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
-stream = ExtResource("4_pbw6q")
-
-[node name="PlayerHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
-stream = ExtResource("6_jw32o")
+color = Color(0.188261, 0.585249, 0.719438, 1)
 
 [node name="PlayerPosition" type="Control" parent="."]
 layout_mode = 1
@@ -68,30 +73,47 @@ z_index = 5
 position = Vector2(20, 20)
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.2
 autostart = true
 
 [node name="MobPath" type="Path2D" parent="."]
-position = Vector2(45, 16)
 curve = SubResource("Curve2D_idj7w")
 
 [node name="SpawnLocation" type="PathFollow2D" parent="MobPath"]
 unique_name_in_owner = true
-position = Vector2(-276, -68)
-rotation = -0.0446531
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("8_50glp")
+HeartTexture = ExtResource("11_grg3l")
+
+[node name="HealthBar" type="HBoxContainer" parent="HUD"]
+custom_minimum_size = Vector2(250, 80)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -172.0
+offset_right = 196.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
 
 [node name="ScoreDisplay" type="Label" parent="HUD"]
 unique_name_in_owner = true
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -231.5
+offset_top = -608.0
 offset_right = 231.5
-offset_bottom = 184.0
+offset_bottom = -424.0
 grow_horizontal = 2
+grow_vertical = 2
 text = "0"
 label_settings = SubResource("LabelSettings_jw32o")
 horizontal_alignment = 1

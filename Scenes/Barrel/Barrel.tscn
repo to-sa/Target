@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpd1f1w75jgmo"]
+[gd_scene load_steps=11 format=3 uid="uid://bpd1f1w75jgmo"]
 
 [ext_resource type="Texture2D" uid="uid://coij15rtoomko" path="res://Assets/tilesheet.png" id="1_743re"]
 [ext_resource type="Script" uid="uid://bcwqy1o4k45b6" path="res://Scenes/Barrel/Barrel.cs" id="1_iifeo"]
@@ -6,6 +6,22 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqfqo"]
 atlas = ExtResource("1_743re")
 region = Rect2(1280, 896, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iifeo"]
+atlas = ExtResource("1_743re")
+region = Rect2(1280, 768, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p276l"]
+atlas = ExtResource("1_743re")
+region = Rect2(1536, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl8ib"]
+atlas = ExtResource("1_743re")
+region = Rect2(1024, 896, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fewer"]
+atlas = ExtResource("1_743re")
+region = Rect2(1664, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_743re"]
 atlas = ExtResource("1_743re")
@@ -16,6 +32,18 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tqfqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iifeo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p276l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cl8ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fewer")
 }],
 "loop": false,
 "name": &"box",

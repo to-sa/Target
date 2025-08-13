@@ -1,7 +1,6 @@
 using Godot;
-using System;
-using System.Dynamic;
 using Target.Scenes;
+using Target.User;
 
 namespace Target.Scripts;
 
@@ -9,23 +8,56 @@ public partial class Main : Control
 {
     [Export] public PackedScene MobScene;
 
-    private Area2D _player;
+    private Player _player;
     private Timer _mobTimer;
-    private PathFollow2D _mobPath;
-
-    public int Score = 0;
+    private PathFollow2D _mobPathFollow;
+    private Path2D _mobPath;
 
     public override void _EnterTree()
     {
-        _player = GetNode<Area2D>("%Player");
+        _player = GetNode<Player>("%Player");
         _mobTimer = GetNode<Timer>("MobTimer");
-        _mobPath = GetNode<PathFollow2D>("%SpawnLocation");
-
+        _mobPathFollow = GetNode<PathFollow2D>("%SpawnLocation");
+        _mobPath = GetNode<Path2D>("MobPath");
     }
 
     public override void _Ready()
     {
         _mobTimer.Timeout += OnMobTimerTimeout;
+
+        // Clear path points
+        var screenSize = GetViewportRect().Size;
+        _mobPath.Curve.ClearPoints();
+
+        // Set path points
+        _mobPath.Curve.AddPoint(new Vector2(-50, -20));
+        _mobPath.Curve.AddPoint(new Vector2(screenSize.X, 0));
+        _mobPath.Curve.AddPoint(new Vector2(screenSize.X, screenSize.Y));
+        _mobPath.Curve.AddPoint(new Vector2(-50, screenSize.Y));
+        _mobPath.Curve.AddPoint(new Vector2(-50, 0));
+    }
+
+    public override void _Process(double delta)
+    {
+        if (_player.health == 0)
+        {
+            GameOver();
+        }
+
+        if (HUD.Instance.Score == 10)
+            {
+                _mobTimer.WaitTime = 1.5f;
+            }
+
+        if (HUD.Instance.Score == 20)
+        {
+            _mobTimer.WaitTime = 1.0f;
+        }
+
+        if (HUD.Instance.Score == 40)
+        {
+            _mobTimer.WaitTime = 0.75f;
+        }
     }
 
     public void GameOver()
@@ -38,8 +70,8 @@ public partial class Main : Control
         Barrel NewBarrel = MobScene.Instantiate<Barrel>();
 
         // Set mob's position to a random positon on the PathFollow2D
-        _mobPath.ProgressRatio = GD.Randf();
-        NewBarrel.GlobalPosition = _mobPath.GlobalPosition;
+        _mobPathFollow.ProgressRatio = GD.Randf();
+        NewBarrel.GlobalPosition = _mobPathFollow.GlobalPosition;
 
         AddChild(NewBarrel);
     }

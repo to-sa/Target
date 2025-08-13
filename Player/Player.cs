@@ -14,6 +14,8 @@ public partial class Player : Area2D
 
     private bool _canFire = true;
 
+    public int health = 3;
+
     public override void _Ready()
     {
         _spawnPosition = GetNode<Marker2D>("Body/LeftArm/FirePosition");
@@ -21,7 +23,7 @@ public partial class Player : Area2D
         _weaponSprite = GetNode<AnimatedSprite2D>("Body/LeftArm/Weapons");
         _weaponSprite.AnimationFinished += BowAnimation;
 
-        _drawSound = GetNode<AudioStreamPlayer2D>("FireSound"); 
+        _drawSound = GetNode<AudioStreamPlayer2D>("FireSound");
 
         _fireRate = GetNode<Timer>("FireRate");
         _fireRate.Timeout += CanFireTimeout;
