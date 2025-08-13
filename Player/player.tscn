@@ -64,3 +64,4 @@ one_shot = true
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_k53q1")
+volume_db = 10.0

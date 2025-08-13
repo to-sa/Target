@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=21 format=3 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
@@ -24,8 +24,38 @@ stream_3/stream = ExtResource("8_frkhe")
 [sub_resource type="Curve2D" id="Curve2D_idj7w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jw32o"]
+line_spacing = 2.0
 font = ExtResource("11_4kpch")
-font_size = 88
+font_size = 100
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_grg3l"]
+default_font = ExtResource("11_4kpch")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frkhe"]
+bg_color = Color(0.271296, 0.686399, 0.548815, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+
+[sub_resource type="Theme" id="Theme_frkhe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grg3l"]
+bg_color = Color(0.877616, 0.877616, 0.877616, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1p5hy"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -43,6 +73,7 @@ HitSound = NodePath("BarrelHitSound")
 
 [node name="BarrelHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
 stream = SubResource("AudioStreamRandomizer_1p5hy")
+volume_db = 15.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -103,18 +134,74 @@ alignment = 1
 
 [node name="ScoreDisplay" type="Label" parent="HUD"]
 unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -218.0
+offset_top = 37.0
+offset_right = 245.0
+offset_bottom = 221.0
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_jw32o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOver" type="Panel" parent="HUD"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -231.5
-offset_top = -608.0
-offset_right = 231.5
-offset_bottom = -424.0
+offset_left = -329.0
+offset_top = -286.0
+offset_right = 329.0
+offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "0"
-label_settings = SubResource("LabelSettings_jw32o")
+theme = SubResource("Theme_grg3l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_frkhe")
+
+[node name="Restart" type="Button" parent="HUD/GameOver"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -206.0
+offset_top = -165.0
+offset_right = 206.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_frkhe")
+theme_override_constants/outline_size = 60
+theme_override_constants/h_separation = 290
+theme_override_constants/icon_max_width = 140
+theme_override_constants/align_to_largest_stylebox = 870
+theme_override_constants/line_spacing = 550
+theme_override_font_sizes/font_size = 40
+theme_override_styles/pressed = SubResource("StyleBoxFlat_grg3l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1p5hy")
+text = "PLAY AGAIN"
+
+[node name="Label" type="Label" parent="HUD/GameOver"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -292.0
+offset_top = 30.0
+offset_right = 292.0
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "GAME OVER!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="HUD/GameOver/Restart" to="." method="OnRestartPressed"]

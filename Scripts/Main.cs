@@ -12,6 +12,7 @@ public partial class Main : Control
     private Timer _mobTimer;
     private PathFollow2D _mobPathFollow;
     private Path2D _mobPath;
+    private Panel _gameOverScreen;
 
     public override void _EnterTree()
     {
@@ -19,6 +20,7 @@ public partial class Main : Control
         _mobTimer = GetNode<Timer>("MobTimer");
         _mobPathFollow = GetNode<PathFollow2D>("%SpawnLocation");
         _mobPath = GetNode<Path2D>("MobPath");
+        _gameOverScreen = GetNode<Panel>("%GameOver");
     }
 
     public override void _Ready()
@@ -45,9 +47,9 @@ public partial class Main : Control
         }
 
         if (HUD.Instance.Score == 10)
-            {
-                _mobTimer.WaitTime = 1.5f;
-            }
+        {
+            _mobTimer.WaitTime = 1.5f;
+        }
 
         if (HUD.Instance.Score == 20)
         {
@@ -62,7 +64,9 @@ public partial class Main : Control
 
     public void GameOver()
     {
+        ProcessMode = ProcessModeEnum.Disabled;
         _mobTimer.Stop();
+        _gameOverScreen.Show();
     }
 
     private void OnMobTimerTimeout()
@@ -74,6 +78,11 @@ public partial class Main : Control
         NewBarrel.GlobalPosition = _mobPathFollow.GlobalPosition;
 
         AddChild(NewBarrel);
+    }
+
+    private void OnRestartPressed()
+    {
+        GetTree().ReloadCurrentScene();
     }
 
 }
