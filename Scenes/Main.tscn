@@ -75,14 +75,17 @@ HitSound = NodePath("BarrelHitSound")
 stream = SubResource("AudioStreamRandomizer_1p5hy")
 volume_db = 15.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.188261, 0.585249, 0.719438, 1)
+[node name="Mobs" type="Node2D" parent="."]
+
+[node name="MobPath" type="Path2D" parent="Mobs"]
+curve = SubResource("Curve2D_idj7w")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="Mobs/MobPath"]
+unique_name_in_owner = true
+
+[node name="MobTimer" type="Timer" parent="Mobs"]
+wait_time = 2.2
+autostart = true
 
 [node name="PlayerPosition" type="Control" parent="."]
 layout_mode = 1
@@ -103,15 +106,15 @@ unique_name_in_owner = true
 z_index = 5
 position = Vector2(20, 20)
 
-[node name="MobTimer" type="Timer" parent="."]
-wait_time = 2.2
-autostart = true
-
-[node name="MobPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_idj7w")
-
-[node name="SpawnLocation" type="PathFollow2D" parent="MobPath"]
-unique_name_in_owner = true
+[node name="Background" type="ColorRect" parent="."]
+z_index = -5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.506411, 0.437072, 0.968498, 1)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("8_50glp")
@@ -195,12 +198,12 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -292.0
-offset_top = 30.0
+offset_top = 41.0
 offset_right = 292.0
-offset_bottom = 220.0
+offset_bottom = 231.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 70
-text = "GAME OVER!"
+text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 

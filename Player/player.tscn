@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://h0vg8bbh0s2s"]
+[gd_scene load_steps=14 format=3 uid="uid://h0vg8bbh0s2s"]
 
 [ext_resource type="Script" uid="uid://ccrwylged1xrd" path="res://Player/Player.cs" id="1_k53q1"]
 [ext_resource type="Texture2D" uid="uid://dx14je43psio7" path="res://Assets/Characters/green_character.png" id="1_l8h54"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ydrx53txov1m" path="res://Assets/Items/weapon_bow_arrow.png" id="4_gwnis"]
 [ext_resource type="AudioStream" uid="uid://d2kqidqp5p3qt" path="res://Assets/Sounds/Audio/impactTin_medium_002.ogg" id="6_fhl08"]
 [ext_resource type="AudioStream" uid="uid://sxaerl6tw8wv" path="res://Assets/Sounds/Audio/impactTin_medium_001.ogg" id="6_od3ui"]
+[ext_resource type="Script" uid="uid://bekjwq33eche" path="res://Scripts/AttackRange.cs" id="8_od3ui"]
+[ext_resource type="PackedScene" uid="uid://roy5shucw0dg" path="res://Weapons/Axe.tscn" id="9_00tjw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gwnis"]
 animations = [{
@@ -36,8 +38,12 @@ streams_count = 2
 stream_0/stream = ExtResource("6_od3ui")
 stream_1/stream = ExtResource("6_fhl08")
 
-[node name="Player" type="Area2D" groups=["player"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtle1"]
+radius = 287.002
+
+[node name="Player" type="Area2D" node_paths=PackedStringArray("Range") groups=["player"]]
 script = ExtResource("1_k53q1")
+Range = NodePath("AttackRange")
 
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("1_l8h54")
@@ -65,3 +71,13 @@ one_shot = true
 [node name="FireSound" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_k53q1")
 volume_db = 10.0
+
+[node name="AttackRange" type="Area2D" parent="."]
+script = ExtResource("8_od3ui")
+WeaponList = Array[PackedScene]([ExtResource("9_00tjw")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource("CircleShape2D_vtle1")
+
+[node name="AttackTimer" type="Timer" parent="AttackRange"]
+wait_time = 2.5

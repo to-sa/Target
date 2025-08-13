@@ -52,6 +52,8 @@ public partial class Barrel : Area2D
 
     private void DoDamage(Player player)
     {
+        if (player.health <= 0) return;
+
         player.health -= 1;
         HUD.Instance.HealthBar.GetChildren().ElementAt(0).QueueFree();
     }

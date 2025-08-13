@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Target.Scenes;
 using Target.User;
@@ -17,9 +18,9 @@ public partial class Main : Control
     public override void _EnterTree()
     {
         _player = GetNode<Player>("%Player");
-        _mobTimer = GetNode<Timer>("MobTimer");
+        _mobTimer = GetNode<Timer>("Mobs/MobTimer");
         _mobPathFollow = GetNode<PathFollow2D>("%SpawnLocation");
-        _mobPath = GetNode<Path2D>("MobPath");
+        _mobPath = GetNode<Path2D>("Mobs/MobPath");
         _gameOverScreen = GetNode<Panel>("%GameOver");
     }
 
@@ -54,11 +55,18 @@ public partial class Main : Control
         if (HUD.Instance.Score == 20)
         {
             _mobTimer.WaitTime = 1.0f;
+            _player.Range._attackTimer.Start();
         }
 
         if (HUD.Instance.Score == 40)
         {
             _mobTimer.WaitTime = 0.75f;
+        }
+
+        if (HUD.Instance.Score == 80)
+        {
+            _mobTimer.WaitTime = 0.5f;
+
         }
     }
 
