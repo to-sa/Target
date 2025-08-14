@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2v4vusylgxha"]
+[gd_scene load_steps=5 format=3 uid="uid://b2v4vusylgxha"]
 
 [ext_resource type="Texture2D" uid="uid://y81cf35330pe" path="res://Assets/iconsDouble.png" id="1_eqnwt"]
 
+[sub_resource type="Theme" id="Theme_eqnwt"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_frkhe"]
+atlas = ExtResource("1_eqnwt")
+region = Rect2(896, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqnwt"]
 atlas = ExtResource("1_eqnwt")
 region = Rect2(896, 128, 128, 128)
 
@@ -13,4 +19,18 @@ anchor_right = 0.167
 anchor_bottom = 0.1
 offset_right = -128.256
 offset_bottom = -128.0
+theme = SubResource("Theme_eqnwt")
 texture = SubResource("AtlasTexture_frkhe")
+
+[node name="Shadow" type="TextureRect" parent="."]
+self_modulate = Color(0.244776, 0.244776, 0.244776, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_eqnwt")

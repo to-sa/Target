@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=24 format=3 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://bpd1f1w75jgmo" path="res://Scenes/Barrel/Barrel.tscn" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://crmwf0q21gxic" path="res://Scenes/Background.tscn" id="3_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://bj8cfvsb6rbre" path="res://Assets/Sounds/SoundManager.tscn" id="3_rgh2o"]
 [ext_resource type="Script" uid="uid://bkftrkk2jryt8" path="res://Assets/Sounds/SoundManager.cs" id="4_v1gob"]
 [ext_resource type="AudioStream" uid="uid://cgxcw2231ws8k" path="res://Assets/Sounds/Audio/impactWood_medium_004.ogg" id="5_bmxlf"]
@@ -69,6 +70,9 @@ grow_vertical = 2
 script = ExtResource("1_idj7w")
 MobScene = ExtResource("2_kln2b")
 
+[node name="Background" parent="." instance=ExtResource("3_h1m7h")]
+layout_mode = 1
+
 [node name="SoundManager" parent="." node_paths=PackedStringArray("HitSound") instance=ExtResource("3_rgh2o")]
 script = ExtResource("4_v1gob")
 HitSound = NodePath("BarrelHitSound")
@@ -118,16 +122,6 @@ collision_mask = 0
 unique_name_in_owner = true
 visible = false
 position = Vector2(21, 22)
-
-[node name="Background" type="ColorRect" parent="."]
-z_index = -5
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.506411, 0.437072, 0.968498, 1)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("8_50glp")

@@ -82,6 +82,10 @@ public partial class Main : Control
             _shield.CollisionMask = 1;
         }
 
+        if (HUD.Instance.Score == 150)
+        {
+            _mobTimer.WaitTime = 0.45f;
+        }
 
     }
 

@@ -14,6 +14,7 @@ public partial class Barrel : Area2D
     [Export] private float _moveSpeed = GD.RandRange(200, 300);
     public AnimatedSprite2D Anim;
     private Area2D _player;
+    private int _rotationSpeed = GD.RandRange(-50, 50);
 
     public override void _Ready()
     {
@@ -30,6 +31,7 @@ public partial class Barrel : Area2D
     public override void _Process(double delta)
     {
         Position += Position.DirectionTo(_player.GlobalPosition) * _moveSpeed * (float)delta;
+        RotationDegrees += _rotationSpeed * (float)delta;
     }
 
     private void OnScreenExited()
