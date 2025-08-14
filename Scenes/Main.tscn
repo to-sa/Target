@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=23 format=3 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://ddivkropj0r82" path="res://Assets/Sounds/Audio/impactWood_light_004.ogg" id="7_grg3l"]
 [ext_resource type="Script" uid="uid://hsmnjj15akm3" path="res://Scripts/HUD.cs" id="8_50glp"]
 [ext_resource type="AudioStream" uid="uid://ko74w1lojvn8" path="res://Assets/Sounds/Audio/impactPunch_heavy_003.ogg" id="8_frkhe"]
+[ext_resource type="PackedScene" uid="uid://tp08c01t0j57" path="res://Weapons/Sword.tscn" id="9_frkhe"]
+[ext_resource type="PackedScene" uid="uid://b7pbyyccdglal" path="res://Weapons/Shield.tscn" id="11_1p5hy"]
 [ext_resource type="FontFile" uid="uid://doj2imcpb52c4" path="res://Assets/Font/Kenney Future.ttf" id="11_4kpch"]
 [ext_resource type="PackedScene" uid="uid://b2v4vusylgxha" path="res://Scenes/Heart.tscn" id="11_grg3l"]
 
@@ -105,6 +107,17 @@ grow_vertical = 2
 unique_name_in_owner = true
 z_index = 5
 position = Vector2(20, 20)
+
+[node name="Sword" parent="PlayerPosition" instance=ExtResource("9_frkhe")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(21, 21)
+collision_mask = 0
+
+[node name="Shield" parent="PlayerPosition" instance=ExtResource("11_1p5hy")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(21, 22)
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -5

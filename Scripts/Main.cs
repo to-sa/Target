@@ -14,6 +14,8 @@ public partial class Main : Control
     private PathFollow2D _mobPathFollow;
     private Path2D _mobPath;
     private Panel _gameOverScreen;
+    private Area2D _sword;
+    private Area2D _shield;
 
     public override void _EnterTree()
     {
@@ -22,6 +24,8 @@ public partial class Main : Control
         _mobPathFollow = GetNode<PathFollow2D>("%SpawnLocation");
         _mobPath = GetNode<Path2D>("Mobs/MobPath");
         _gameOverScreen = GetNode<Panel>("%GameOver");
+        _sword = GetNode<Area2D>("%Sword");
+        _shield = GetNode<Area2D>("%Shield");
     }
 
     public override void _Ready()
@@ -49,25 +53,36 @@ public partial class Main : Control
 
         if (HUD.Instance.Score == 10)
         {
-            _mobTimer.WaitTime = 1.5f;
+            _mobTimer.WaitTime = 1.3f;
         }
 
-        if (HUD.Instance.Score == 20)
+        if (HUD.Instance.Score == 15)
         {
-            _mobTimer.WaitTime = 1.0f;
             _player.Range._attackTimer.Start();
         }
 
         if (HUD.Instance.Score == 40)
         {
-            _mobTimer.WaitTime = 0.75f;
+            _mobTimer.WaitTime = 1.0f;
+
         }
 
-        if (HUD.Instance.Score == 80)
+        if (HUD.Instance.Score == 60)
         {
-            _mobTimer.WaitTime = 0.5f;
-
+            _mobTimer.WaitTime = 0.8f;
+            _sword.Show();
+            _sword.CollisionMask = 1;
+            _player.AttackTimer.WaitTime = 1.15;
         }
+
+        if (HUD.Instance.Score == 90)
+        {
+            _mobTimer.WaitTime = 0.6f;
+            _shield.Show();
+            _shield.CollisionMask = 1;
+        }
+
+
     }
 
     public void GameOver()

@@ -39,7 +39,7 @@ stream_0/stream = ExtResource("6_od3ui")
 stream_1/stream = ExtResource("6_fhl08")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vtle1"]
-radius = 287.002
+radius = 380.001
 
 [node name="Player" type="Area2D" node_paths=PackedStringArray("Range") groups=["player"]]
 script = ExtResource("1_k53q1")

@@ -23,12 +23,14 @@ public partial class Player : Area2D
     private AudioStreamPlayer2D _drawSound;
 
     private bool _canFire = true;
-
+    public Timer AttackTimer;
     public int health = 3;
 
 
     public override void _Ready()
     {
+        AttackTimer = GetNode<Timer>("AttackRange/AttackTimer");
+
         _spawnPosition = GetNode<Marker2D>("Body/LeftArm/FirePosition");
 
         _weaponSprite = GetNode<AnimatedSprite2D>("Body/LeftArm/Weapons");

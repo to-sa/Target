@@ -11,7 +11,7 @@ namespace Target.Scenes;
 public partial class Barrel : Area2D
 {
 
-    [Export] private float _moveSpeed = GD.RandRange(150, 400);
+    [Export] private float _moveSpeed = GD.RandRange(200, 300);
     public AnimatedSprite2D Anim;
     private Area2D _player;
 
