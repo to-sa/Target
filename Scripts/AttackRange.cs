@@ -28,7 +28,8 @@ public partial class AttackRange : Area2D
 
         if (!_canThrowAxe) return;
 
-        CallDeferred("SpawnAxe", barrel);
+        
+        //CallDeferred("SpawnAxe", barrel);
 
     }
 

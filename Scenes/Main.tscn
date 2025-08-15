@@ -1,14 +1,20 @@
-[gd_scene load_steps=33 format=3 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=46 format=3 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://bpd1f1w75jgmo" path="res://Scenes/Barrel/Barrel.tscn" id="2_kln2b"]
 [ext_resource type="PackedScene" uid="uid://crmwf0q21gxic" path="res://Scenes/Background.tscn" id="3_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://bj8cfvsb6rbre" path="res://Assets/Sounds/SoundManager.tscn" id="3_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://c3rfnygv6swyv" path="res://Assets/Background/Brown.png" id="3_xvtyr"]
+[ext_resource type="Texture2D" uid="uid://crxj6bdaamiy0" path="res://Assets/Background/Gray.png" id="4_u7mjy"]
 [ext_resource type="Script" uid="uid://bkftrkk2jryt8" path="res://Assets/Sounds/SoundManager.cs" id="4_v1gob"]
+[ext_resource type="Texture2D" uid="uid://b7trsovk3ummc" path="res://Assets/Background/Green.png" id="5_4yxf6"]
 [ext_resource type="AudioStream" uid="uid://cgxcw2231ws8k" path="res://Assets/Sounds/Audio/impactWood_medium_004.ogg" id="5_bmxlf"]
 [ext_resource type="AudioStream" uid="uid://bi75bdjkpc04i" path="res://Assets/Sounds/Audio/impactPunch_medium_003.ogg" id="6_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://dfxkmeac5ssgc" path="res://Assets/Background/Pink.png" id="6_qta6b"]
 [ext_resource type="AudioStream" uid="uid://ddivkropj0r82" path="res://Assets/Sounds/Audio/impactWood_light_004.ogg" id="7_grg3l"]
+[ext_resource type="Texture2D" uid="uid://1umpgrs88jfl" path="res://Assets/Background/Purple.png" id="7_x3rx7"]
+[ext_resource type="Texture2D" uid="uid://ddw4y47eqya3m" path="res://Assets/Background/Yellow.png" id="8_6heos"]
 [ext_resource type="Script" uid="uid://hsmnjj15akm3" path="res://Scripts/HUD.cs" id="8_50glp"]
 [ext_resource type="AudioStream" uid="uid://ko74w1lojvn8" path="res://Assets/Sounds/Audio/impactPunch_heavy_003.ogg" id="8_frkhe"]
 [ext_resource type="PackedScene" uid="uid://tp08c01t0j57" path="res://Weapons/Sword.tscn" id="9_frkhe"]
@@ -19,9 +25,12 @@
 [ext_resource type="Texture2D" uid="uid://cmomfdodshakt" path="res://Assets/UI/Extra/Double/icon_repeat_outline.png" id="17_2w5on"]
 [ext_resource type="Texture2D" uid="uid://c2fgs8ftqhemk" path="res://Assets/UI/Grey/Double/button_rectangle_depth_line.png" id="17_hwpts"]
 [ext_resource type="Texture2D" uid="uid://ox2vqujmd47x" path="res://Assets/UI/Extra/Double/icon_play_outline.png" id="18_346fj"]
+[ext_resource type="Texture2D" uid="uid://bc3pnamo8blhj" path="res://Assets/UI/Grey/Double/button_rectangle_border.png" id="20_jyqft"]
 [ext_resource type="PackedScene" uid="uid://0bdkwrl6idm6" path="res://Scenes/OptionsScene.tscn" id="20_sxkr1"]
 [ext_resource type="Texture2D" uid="uid://ckv13v1aeywkb" path="res://Assets/UI/Grey/Double/check_round_grey_circle.png" id="21_fq0cl"]
-[ext_resource type="Texture2D" uid="uid://ov3p8fmqydta" path="res://Assets/UI/Grey/Double/arrow_basic_w.png" id="22_hwpts"]
+[ext_resource type="Texture2D" uid="uid://b70s1slndtbmq" path="res://Assets/UI/Grey/Double/check_square_color_cross.png" id="22_c4ay3"]
+[ext_resource type="Texture2D" uid="uid://bhyv2pyy2kwi7" path="res://Assets/UI/Blue/Double/button_rectangle_gloss.png" id="23_3tgeq"]
+[ext_resource type="Texture2D" uid="uid://bwpfhknxebhaj" path="res://Assets/UI/Blue/Double/button_rectangle_depth_border.png" id="23_c4ay3"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1p5hy"]
 random_volume_offset_db = 2.51
@@ -58,6 +67,18 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sclb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3tgeq"]
+texture = ExtResource("20_jyqft")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aht7i"]
+texture = ExtResource("23_c4ay3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5jffn"]
+texture = ExtResource("23_c4ay3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c4ay3"]
+texture = ExtResource("23_3tgeq")
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -67,6 +88,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_idj7w")
 MobScene = ExtResource("2_kln2b")
+Backgrounds = Array[Texture2D]([ExtResource("3_xvtyr"), ExtResource("4_u7mjy"), ExtResource("5_4yxf6"), ExtResource("6_qta6b"), ExtResource("7_x3rx7"), ExtResource("8_6heos")])
 
 [node name="Background" parent="." instance=ExtResource("3_h1m7h")]
 layout_mode = 1
@@ -166,6 +188,7 @@ vertical_alignment = 1
 [node name="GameOver" type="Panel" parent="HUD"]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -220,44 +243,66 @@ icon = ExtResource("18_346fj")
 flat = true
 icon_alignment = 1
 
-[node name="Label" type="Label" parent="HUD/GameOver"]
+[node name="HighScoreLabel" type="Label" parent="HUD/GameOver"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.143
+anchor_top = 0.323
 anchor_right = 0.5
-anchor_bottom = 0.143
+anchor_bottom = 0.323
 offset_left = -292.0
-offset_top = 0.326996
+offset_top = -127.653
 offset_right = 292.0
-offset_bottom = 190.327
+offset_bottom = 128.347
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_3tgeq")
 text = "HIGH SCORE
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="OptionsPanel" parent="HUD" instance=ExtResource("20_sxkr1")]
 process_mode = 3
 visible = false
-offset_top = -39.44
-offset_bottom = -14.08
+offset_top = -95.72
+offset_bottom = -70.36
 
 [node name="BackButton2" type="Button" parent="HUD/OptionsPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.186
-anchor_right = 0.5
-anchor_bottom = 1.186
-offset_left = -61.0
-offset_top = -54.188
-offset_right = 27.0
-offset_bottom = 17.812
+anchor_left = 0.854
+anchor_top = 0.175
+anchor_right = 0.885
+anchor_bottom = 0.175
+offset_left = -32.5519
+offset_top = -66.15
+offset_right = 34.12
+offset_bottom = 5.84999
 scale = Vector2(1.5, 1.5)
-icon = ExtResource("22_hwpts")
+icon = ExtResource("22_c4ay3")
 flat = true
+
+[node name="MenuButton" type="Button" parent="HUD/OptionsPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.065
+anchor_right = 0.5
+anchor_bottom = 1.065
+offset_left = -126.0
+offset_top = -4.77002
+offset_right = 130.0
+offset_bottom = 97.23
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_aht7i")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5jffn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_c4ay3")
+text = "MENU"
 
 [node name="OptionsButton" type="Button" parent="HUD"]
 process_mode = 3
@@ -276,4 +321,5 @@ flat = true
 [connection signal="pressed" from="HUD/GameOver/Restart" to="." method="OnRestartPressed"]
 [connection signal="pressed" from="HUD/GameOver/HomeScreen" to="." method="OnHomeScreenPressed"]
 [connection signal="pressed" from="HUD/OptionsPanel/BackButton2" to="." method="OnBackButtonPressed"]
+[connection signal="pressed" from="HUD/OptionsPanel/MenuButton" to="." method="OnMenuButtonPressed"]
 [connection signal="pressed" from="HUD/OptionsButton" to="." method="OnOptionsButtonPressed"]

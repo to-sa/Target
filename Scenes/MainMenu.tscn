@@ -97,14 +97,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -165.0
-offset_right = 192.0
-offset_bottom = 269.0
+offset_left = -217.0
+offset_top = -193.0
+offset_right = 167.0
+offset_bottom = 241.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.2, 1.2)
 theme = SubResource("Theme_xim88")
-theme_override_constants/separation = 25
+theme_override_constants/separation = 70
 
 [node name="Start" type="Button" parent="ButtonContainer"]
 custom_minimum_size = Vector2(384, 128)
@@ -194,15 +195,14 @@ flat = true
 [node name="OptionsPanel" parent="." instance=ExtResource("8_cmrfp")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
 anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 46.0
-offset_top = 416.0
-offset_right = -42.0
-offset_bottom = -355.0
+anchor_top = 0.145
+anchor_right = 0.957
+anchor_bottom = 0.783
+offset_left = 0.0
+offset_top = 0.399994
+offset_right = -32.976
+offset_bottom = -74.2401
 
 [node name="BackButton" type="Button" parent="OptionsPanel"]
 layout_mode = 1
