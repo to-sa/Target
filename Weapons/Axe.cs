@@ -8,11 +8,20 @@ namespace Target.Weapons;
 [GlobalClass]
 public partial class Axe : Area2D
 {
-    const int Speed = 400;
+    const int Speed = 450;
+    public bool EnemyInSight = false;
 
     public override void _Process(double delta)
     {
-        Position += Transform.X * Speed * (float)delta;
+        if (EnemyInSight)
+        {
+            Position += Transform.X * Speed * (float)delta;
+        }
+    }
+
+    private void OnScreenExited()
+    {
+        QueueFree();
     }
 
     private void OnAreaEntered(Area2D area)
@@ -24,10 +33,11 @@ public partial class Axe : Area2D
         QueueFree();
     }
 
-    private void OnScreenExited()
+    private void OnRangeAreaEntered(Area2D area)
     {
-        QueueFree();
-        GD.Print("Deleted axe");
+        if (area is not Barrel barrel) return;
+        EnemyInSight = true;
+        LookAt(barrel.GlobalPosition);
     }
 
 }

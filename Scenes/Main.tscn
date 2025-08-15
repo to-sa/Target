@@ -149,6 +149,10 @@ unique_name_in_owner = true
 visible = false
 position = Vector2(21, 22)
 
+[node name="AxeTimer" type="Timer" parent="PlayerPosition"]
+unique_name_in_owner = true
+wait_time = 1.5
+
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("8_50glp")
 HeartTexture = ExtResource("11_grg3l")
@@ -318,6 +322,7 @@ scale = Vector2(1.5, 1.5)
 icon = ExtResource("21_fq0cl")
 flat = true
 
+[connection signal="timeout" from="PlayerPosition/AxeTimer" to="." method="OnAxeTimeout"]
 [connection signal="pressed" from="HUD/GameOver/Restart" to="." method="OnRestartPressed"]
 [connection signal="pressed" from="HUD/GameOver/HomeScreen" to="." method="OnHomeScreenPressed"]
 [connection signal="pressed" from="HUD/OptionsPanel/BackButton2" to="." method="OnBackButtonPressed"]

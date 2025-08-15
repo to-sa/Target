@@ -4,15 +4,17 @@ using Godot;
 using Godot.Collections;
 using Target.Scenes;
 using Target.User;
+using Target.Weapons;
 
 namespace Target.Scripts;
 
 public partial class Main : Control
 {
     [Export] public PackedScene MobScene;
-    [Export] public Array<Texture2D> Backgrounds; 
+    [Export] public Array<Texture2D> Backgrounds;
 
     PackedScene HomeScreen = GD.Load<PackedScene>("res://Scenes/MainMenu.tscn");
+    PackedScene Axe = GD.Load<PackedScene>("res://Weapons/Axe.tscn");
 
     private Player _player;
     private Timer _mobTimer;
@@ -24,7 +26,7 @@ public partial class Main : Control
     private Area2D _shield;
     private Panel _optionsPanel;
     private TextureRect _background;
-    private bool _backgroundChanged = false;
+    private Timer _axeTimer;
 
     public override void _EnterTree()
     {
@@ -38,6 +40,7 @@ public partial class Main : Control
         _optionsPanel = GetNode<Panel>("HUD/OptionsPanel");
         _highScoreLabel = GetNode<Label>("%HighScoreLabel");
         _background = GetNode<TextureRect>("Background");
+        _axeTimer = GetNode<Timer>("%AxeTimer");
     }
 
     public override void _Ready()
@@ -59,7 +62,7 @@ public partial class Main : Control
     }
 
     public override void _Process(double delta)
-    {   
+    {
         if (_player.health == 0)
         {
             GameOver();
@@ -72,8 +75,8 @@ public partial class Main : Control
 
         if (HUD.Instance.Score == 15)
         {
-            _player.Range._attackTimer.Start();
             _background.Texture = Backgrounds[0];
+            _axeTimer.Start();
         }
 
         if (HUD.Instance.Score == 40)
@@ -87,7 +90,6 @@ public partial class Main : Control
             _mobTimer.WaitTime = 0.8f;
             _sword.Show();
             _sword.CollisionMask = 1;
-            _player.AttackTimer.WaitTime = 1.15;
         }
 
         if (HUD.Instance.Score == 100)
@@ -100,7 +102,7 @@ public partial class Main : Control
 
         if (HUD.Instance.Score == 150)
         {
-         _background.Texture = Backgrounds[1];
+            _background.Texture = Backgrounds[1];
         }
 
     }
@@ -158,5 +160,17 @@ public partial class Main : Control
     private void OnMenuButtonPressed()
     {
         GetTree().ChangeSceneToPacked(HomeScreen);
+    }
+
+    private void OnAxeTimeout()
+    {
+        SpawnAxe();
+    }
+
+    private void SpawnAxe()
+    {
+        Axe axe = Axe.Instantiate<Axe>();
+        GetTree().CurrentScene.AddChild(axe);
+        axe.GlobalPosition = _player.GlobalPosition;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using Target.Scenes;
 using Godot.Collections;
 using Target.Weapons;
+using Target.Scripts;
 
 namespace Target.User;
 
@@ -12,11 +13,6 @@ public partial class Player : Area2D
 {
     private PackedScene _arrowScene = GD.Load<PackedScene>("Weapons/Arrow.tscn");
 
-    [Export] public AttackRange Range;
-
-    const int AXE = 0;
-
-    // Child nodes
     private Marker2D _spawnPosition;
     private Timer _fireRate;
     private Timer _takeDamageTimer;
@@ -27,13 +23,10 @@ public partial class Player : Area2D
     public bool CanTakeDamage = true;
     private Tween _tween;
 
-    public Timer AttackTimer;
     public int health = 3;
 
     public override void _Ready()
     {
-        AttackTimer = GetNode<Timer>("AttackRange/AttackTimer");
-
         _spawnPosition = GetNode<Marker2D>("Body/LeftArm/FirePosition");
 
         _weaponSprite = GetNode<AnimatedSprite2D>("Body/LeftArm/Weapons");
