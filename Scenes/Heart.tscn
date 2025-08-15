@@ -19,6 +19,7 @@ anchor_right = 0.167
 anchor_bottom = 0.1
 offset_right = -128.256
 offset_bottom = -128.0
+pivot_offset = Vector2(64, 64)
 theme = SubResource("Theme_eqnwt")
 texture = SubResource("AtlasTexture_frkhe")
 

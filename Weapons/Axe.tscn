@@ -97,6 +97,7 @@ z_index = 5
 script = ExtResource("1_k30c8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.46844, 0.218574, 0.449, 1)
 texture = ExtResource("1_66yfv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

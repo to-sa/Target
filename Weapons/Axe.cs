@@ -8,7 +8,7 @@ namespace Target.Weapons;
 [GlobalClass]
 public partial class Axe : Area2D
 {
-    const int Speed = 300;
+    const int Speed = 400;
 
     public override void _Process(double delta)
     {

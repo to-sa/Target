@@ -41,5 +41,5 @@ public partial class HUD : CanvasLayer
         }
 
     }
-
+    
 }

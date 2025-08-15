@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Target"
-run/main_scene="uid://dpeyq71n36xji"
+run/main_scene="uid://dwjdsth2qu1oe"
 config/features=PackedStringArray("4.4", "C#", "Mobile")
 config/icon="res://icon.svg"
 

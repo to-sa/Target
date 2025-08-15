@@ -8,6 +8,7 @@ namespace Target.Scripts;
 public partial class Main : Control
 {
     [Export] public PackedScene MobScene;
+    PackedScene HomeScreen = GD.Load<PackedScene>("res://Scenes/MainMenu.tscn");
 
     private Player _player;
     private Timer _mobTimer;
@@ -16,6 +17,7 @@ public partial class Main : Control
     private Panel _gameOverScreen;
     private Area2D _sword;
     private Area2D _shield;
+    private Panel _optionsPanel;
 
     public override void _EnterTree()
     {
@@ -26,6 +28,7 @@ public partial class Main : Control
         _gameOverScreen = GetNode<Panel>("%GameOver");
         _sword = GetNode<Area2D>("%Sword");
         _shield = GetNode<Area2D>("%Shield");
+        _optionsPanel = GetNode<Panel>("HUD/OptionsPanel");
     }
 
     public override void _Ready()
@@ -112,4 +115,21 @@ public partial class Main : Control
         GetTree().ReloadCurrentScene();
     }
 
+    private void OnHomeScreenPressed()
+    {
+        GetTree().ChangeSceneToPacked(HomeScreen);
+    }
+
+    private void OnOptionsButtonPressed()
+    {
+        _optionsPanel.Show();
+        ProcessMode = ProcessModeEnum.Disabled;
+    }
+
+    private void OnBackButtonPressed()
+    {
+        _optionsPanel.Hide();
+        ProcessMode = ProcessModeEnum.Inherit;
+
+    }
 }

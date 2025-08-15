@@ -19,13 +19,16 @@ public partial class Player : Area2D
     // Child nodes
     private Marker2D _spawnPosition;
     private Timer _fireRate;
+    private Timer _takeDamageTimer;
     private AnimatedSprite2D _weaponSprite;
     private AudioStreamPlayer2D _drawSound;
 
     private bool _canFire = true;
+    public bool CanTakeDamage = true;
+    private Tween _tween;
+
     public Timer AttackTimer;
     public int health = 3;
-
 
     public override void _Ready()
     {
@@ -40,14 +43,14 @@ public partial class Player : Area2D
 
         _fireRate = GetNode<Timer>("FireRate");
         _fireRate.Timeout += CanFireTimeout;
+
+        _takeDamageTimer = GetNode<Timer>("TakeDamageTimer");
     }
 
     public override void _Input(InputEvent @event)
     {
         if (@event is not InputEventScreenTouch touch) return;
-
         if (!_canFire) return;
-
         ReadyBow(touch.Position);
     }
 
@@ -78,5 +81,25 @@ public partial class Player : Area2D
     private void BowAnimation()
     {
         _weaponSprite.Play("draw");
+    }
+
+    private void OnAreaEntered(Area2D area)
+    {
+        if (area is not Barrel barrel) return;
+        Animate();
+        _tween.TweenProperty(GetNode("Body"), "modulate", Colors.Red, 0.2f);
+        _tween.TweenProperty(GetNode("Body"), "modulate", Colors.White, 0.1f);
+        _takeDamageTimer.Start();
+    }
+
+    private void Animate()
+    {
+        _tween?.Kill();
+        _tween = CreateTween();
+    }
+
+    private void OnDamageTimerTimeout()
+    {
+        CanTakeDamage = true;
     }
 }

@@ -68,6 +68,10 @@ shape = SubResource("CircleShape2D_l8h54")
 wait_time = 0.5
 one_shot = true
 
+[node name="TakeDamageTimer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
 [node name="FireSound" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_k53q1")
 volume_db = 10.0
@@ -81,3 +85,6 @@ shape = SubResource("CircleShape2D_vtle1")
 
 [node name="AttackTimer" type="Timer" parent="AttackRange"]
 wait_time = 2.5
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="timeout" from="TakeDamageTimer" to="." method="OnDamageTimerTimeout"]

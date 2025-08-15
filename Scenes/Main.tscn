@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=33 format=3 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
@@ -12,9 +12,16 @@
 [ext_resource type="Script" uid="uid://hsmnjj15akm3" path="res://Scripts/HUD.cs" id="8_50glp"]
 [ext_resource type="AudioStream" uid="uid://ko74w1lojvn8" path="res://Assets/Sounds/Audio/impactPunch_heavy_003.ogg" id="8_frkhe"]
 [ext_resource type="PackedScene" uid="uid://tp08c01t0j57" path="res://Weapons/Sword.tscn" id="9_frkhe"]
+[ext_resource type="AudioStream" uid="uid://c6uhjq1mjp7ki" path="res://Assets/Sounds/Music/TargetSong.wav" id="10_0sclb"]
 [ext_resource type="PackedScene" uid="uid://b7pbyyccdglal" path="res://Weapons/Shield.tscn" id="11_1p5hy"]
 [ext_resource type="FontFile" uid="uid://doj2imcpb52c4" path="res://Assets/Font/Kenney Future.ttf" id="11_4kpch"]
 [ext_resource type="PackedScene" uid="uid://b2v4vusylgxha" path="res://Scenes/Heart.tscn" id="11_grg3l"]
+[ext_resource type="Texture2D" uid="uid://dxehf6jp80xm1" path="res://Assets/UI/Green/Double/button_square_depth_flat.png" id="16_346fj"]
+[ext_resource type="Texture2D" uid="uid://cmomfdodshakt" path="res://Assets/UI/Extra/Double/icon_repeat_outline.png" id="17_2w5on"]
+[ext_resource type="Texture2D" uid="uid://ox2vqujmd47x" path="res://Assets/UI/Extra/Double/icon_play_outline.png" id="18_346fj"]
+[ext_resource type="PackedScene" uid="uid://0bdkwrl6idm6" path="res://Scenes/OptionsScene.tscn" id="20_sxkr1"]
+[ext_resource type="Texture2D" uid="uid://ckv13v1aeywkb" path="res://Assets/UI/Grey/Double/check_round_grey_circle.png" id="21_fq0cl"]
+[ext_resource type="Texture2D" uid="uid://ov3p8fmqydta" path="res://Assets/UI/Grey/Double/arrow_basic_w.png" id="22_hwpts"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1p5hy"]
 random_volume_offset_db = 2.51
@@ -26,6 +33,10 @@ stream_3/stream = ExtResource("8_frkhe")
 
 [sub_resource type="Curve2D" id="Curve2D_idj7w"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2w5on"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h1m7h"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_jw32o"]
 line_spacing = 2.0
 font = ExtResource("11_4kpch")
@@ -36,29 +47,16 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="Theme" id="Theme_grg3l"]
 default_font = ExtResource("11_4kpch")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frkhe"]
-bg_color = Color(0.271296, 0.686399, 0.548815, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-shadow_size = 10
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2w5on"]
+texture = ExtResource("16_346fj")
 
 [sub_resource type="Theme" id="Theme_frkhe"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grg3l"]
-bg_color = Color(0.877616, 0.877616, 0.877616, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_346fj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1p5hy"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sclb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -80,6 +78,11 @@ HitSound = NodePath("BarrelHitSound")
 [node name="BarrelHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
 stream = SubResource("AudioStreamRandomizer_1p5hy")
 volume_db = 15.0
+
+[node name="Music" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("10_0sclb")
+autoplay = true
+bus = &"GameMusic"
 
 [node name="Mobs" type="Node2D" parent="."]
 
@@ -144,6 +147,7 @@ alignment = 1
 
 [node name="ScoreDisplay" type="Label" parent="HUD"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2w5on")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -152,6 +156,7 @@ offset_top = 37.0
 offset_right = 245.0
 offset_bottom = 221.0
 grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_h1m7h")
 text = "0"
 label_settings = SubResource("LabelSettings_jw32o")
 horizontal_alignment = 1
@@ -167,13 +172,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -329.0
-offset_top = -286.0
+offset_top = -364.0
 offset_right = 329.0
-offset_bottom = 133.0
+offset_bottom = 347.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_grg3l")
-theme_override_styles/panel = SubResource("StyleBoxFlat_frkhe")
+theme_override_styles/panel = SubResource("StyleBoxTexture_2w5on")
 
 [node name="Restart" type="Button" parent="HUD/GameOver"]
 layout_mode = 1
@@ -182,22 +187,38 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -206.0
-offset_top = -165.0
-offset_right = 206.0
-offset_bottom = -55.0
+offset_left = 47.0
+offset_top = -336.0
+offset_right = 145.0
+offset_bottom = -248.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(2, 2)
 theme = SubResource("Theme_frkhe")
-theme_override_constants/outline_size = 60
-theme_override_constants/h_separation = 290
-theme_override_constants/icon_max_width = 140
-theme_override_constants/align_to_largest_stylebox = 870
-theme_override_constants/line_spacing = 550
-theme_override_font_sizes/font_size = 40
-theme_override_styles/pressed = SubResource("StyleBoxFlat_grg3l")
-theme_override_styles/normal = SubResource("StyleBoxFlat_1p5hy")
-text = "PLAY AGAIN"
+theme_override_styles/focus = SubResource("StyleBoxFlat_346fj")
+icon = ExtResource("17_2w5on")
+flat = true
+icon_alignment = 1
+
+[node name="HomeScreen" type="Button" parent="HUD/GameOver"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -160.0
+offset_right = -7.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+scale = Vector2(2, 2)
+theme_override_styles/focus = SubResource("StyleBoxFlat_0sclb")
+icon = ExtResource("18_346fj")
+flat = true
+icon_alignment = 1
 
 [node name="Label" type="Label" parent="HUD/GameOver"]
 layout_mode = 1
@@ -205,13 +226,47 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -292.0
-offset_top = 41.0
+offset_top = 81.0
 offset_right = 292.0
-offset_bottom = 231.0
+offset_bottom = 271.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 70
-text = "GAME OVER"
+text = "HIGH SCORE
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="OptionsPanel" parent="HUD" instance=ExtResource("20_sxkr1")]
+process_mode = 3
+visible = false
+offset_top = -39.44
+offset_bottom = -14.08
+
+[node name="BackButton2" type="Button" parent="HUD/OptionsPanel"]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 489.0
+offset_right = 371.0
+offset_bottom = 561.0
+scale = Vector2(1.5, 1.5)
+icon = ExtResource("22_hwpts")
+flat = true
+
+[node name="OptionsButton" type="Button" parent="HUD"]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -127.0
+offset_top = 27.0
+offset_right = -55.0
+offset_bottom = 99.0
+grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
+icon = ExtResource("21_fq0cl")
+flat = true
+
 [connection signal="pressed" from="HUD/GameOver/Restart" to="." method="OnRestartPressed"]
+[connection signal="pressed" from="HUD/GameOver/HomeScreen" to="." method="OnHomeScreenPressed"]
+[connection signal="pressed" from="HUD/OptionsPanel/BackButton2" to="." method="OnBackButtonPressed"]
+[connection signal="pressed" from="HUD/OptionsButton" to="." method="OnOptionsButtonPressed"]
