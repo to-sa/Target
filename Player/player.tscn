@@ -74,7 +74,8 @@ one_shot = true
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_k53q1")
-volume_db = 10.0
+volume_db = 15.0
+bus = &"SFX"
 
 [node name="AttackRange" type="Area2D" parent="."]
 script = ExtResource("8_od3ui")
