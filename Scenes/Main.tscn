@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=47 format=3 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://b2v4vusylgxha" path="res://Scenes/Heart.tscn" id="11_grg3l"]
 [ext_resource type="Texture2D" uid="uid://cmomfdodshakt" path="res://Assets/UI/Extra/Double/icon_repeat_outline.png" id="17_2w5on"]
 [ext_resource type="Texture2D" uid="uid://c2fgs8ftqhemk" path="res://Assets/UI/Grey/Double/button_rectangle_depth_line.png" id="17_hwpts"]
+[ext_resource type="AudioStream" uid="uid://ckdfnocwmyi0h" path="res://Assets/Sounds/Music/Slow.wav" id="17_u7mjy"]
 [ext_resource type="Texture2D" uid="uid://ox2vqujmd47x" path="res://Assets/UI/Extra/Double/icon_play_outline.png" id="18_346fj"]
 [ext_resource type="Texture2D" uid="uid://bc3pnamo8blhj" path="res://Assets/UI/Grey/Double/button_rectangle_border.png" id="20_jyqft"]
 [ext_resource type="PackedScene" uid="uid://0bdkwrl6idm6" path="res://Scenes/OptionsScene.tscn" id="20_sxkr1"]
@@ -93,18 +94,23 @@ Backgrounds = Array[Texture2D]([ExtResource("3_xvtyr"), ExtResource("4_u7mjy"), 
 [node name="Background" parent="." instance=ExtResource("3_h1m7h")]
 layout_mode = 1
 
-[node name="SoundManager" parent="." node_paths=PackedStringArray("HitSound") instance=ExtResource("3_rgh2o")]
+[node name="SoundManager" parent="." node_paths=PackedStringArray("HitSound", "MusicOne", "MusicTwo") instance=ExtResource("3_rgh2o")]
 script = ExtResource("4_v1gob")
 HitSound = NodePath("BarrelHitSound")
+MusicOne = NodePath("Fast")
+MusicTwo = NodePath("Slow")
 
 [node name="BarrelHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
 stream = SubResource("AudioStreamRandomizer_1p5hy")
 volume_db = 20.0
 bus = &"SFX"
 
-[node name="Music" type="AudioStreamPlayer" parent="SoundManager"]
+[node name="Fast" type="AudioStreamPlayer" parent="SoundManager"]
 stream = ExtResource("10_0sclb")
-autoplay = true
+bus = &"GameMusic"
+
+[node name="Slow" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("17_u7mjy")
 bus = &"GameMusic"
 
 [node name="Mobs" type="Node2D" parent="."]
@@ -151,7 +157,7 @@ position = Vector2(21, 22)
 
 [node name="AxeTimer" type="Timer" parent="PlayerPosition"]
 unique_name_in_owner = true
-wait_time = 1.5
+wait_time = 2.5
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("8_50glp")

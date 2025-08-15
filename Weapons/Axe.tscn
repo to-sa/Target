@@ -93,7 +93,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k30c8"]
-radius = 351.411
+radius = 267.007
 
 [node name="Axe" type="Area2D"]
 z_index = 5
