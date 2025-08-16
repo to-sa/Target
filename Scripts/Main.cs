@@ -13,7 +13,7 @@ public partial class Main : Control
     [Export] public PackedScene MobScene;
     [Export] public Array<Texture2D> Backgrounds;
 
-    PackedScene HomeScreen = GD.Load<PackedScene>("res://Scenes/MainMenu.tscn");
+    PackedScene HomeScreen = GD.Load<PackedScene>("res://Scenes/UI/MainMenu.tscn");
     PackedScene Axe = GD.Load<PackedScene>("res://Weapons/Axe.tscn");
 
     private Player _player;

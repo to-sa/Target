@@ -1,0 +1,219 @@
+[gd_scene load_steps=19 format=3 uid="uid://dwjdsth2qu1oe"]
+
+[ext_resource type="FontFile" uid="uid://doj2imcpb52c4" path="res://Assets/Font/Kenney Future.ttf" id="1_ynupv"]
+[ext_resource type="Script" uid="uid://qm0rank33v1r" path="res://Scripts/Menu.cs" id="2_m48tj"]
+[ext_resource type="PackedScene" uid="uid://crmwf0q21gxic" path="res://Scenes/UI/Background.tscn" id="3_dvisc"]
+[ext_resource type="Texture2D" uid="uid://1umpgrs88jfl" path="res://Assets/Background/Purple.png" id="4_ab04i"]
+[ext_resource type="Texture2D" uid="uid://d4dtfpi3ubl1v" path="res://Assets/UI/Grey/Double/button_rectangle_depth_border.png" id="5_hys1s"]
+[ext_resource type="Texture2D" uid="uid://dtknkt5038fjg" path="res://Assets/UI/Extra/Double/button_rectangle_line.png" id="6_fgqbg"]
+[ext_resource type="Texture2D" uid="uid://ov3p8fmqydta" path="res://Assets/UI/Grey/Double/arrow_basic_w.png" id="7_euk5f"]
+[ext_resource type="PackedScene" uid="uid://0bdkwrl6idm6" path="res://Scenes/UI/OptionsScene.tscn" id="8_kdsd0"]
+[ext_resource type="AudioStream" uid="uid://uwa14cvdtcxq" path="res://Assets/Sounds/Music/TheBeginning.wav" id="9_w0mr3"]
+
+[sub_resource type="Theme" id="Theme_df05h"]
+default_font = ExtResource("1_ynupv")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rrcx7"]
+texture = ExtResource("5_hys1s")
+modulate_color = Color(1, 1, 1, 0.380392)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_if7li"]
+texture = ExtResource("5_hys1s")
+modulate_color = Color(1, 1, 1, 0.454902)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_loo7a"]
+texture = ExtResource("5_hys1s")
+modulate_color = Color(1, 1, 1, 0.560784)
+
+[sub_resource type="Theme" id="Theme_xim88"]
+Button/styles/hover = SubResource("StyleBoxTexture_rrcx7")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_if7li")
+Button/styles/pressed = SubResource("StyleBoxTexture_loo7a")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_koqhg"]
+texture = ExtResource("5_hys1s")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8um5k"]
+texture = ExtResource("5_hys1s")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xim88"]
+texture = ExtResource("5_hys1s")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cmrfp"]
+texture = ExtResource("6_fgqbg")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_df05h")
+script = ExtResource("2_m48tj")
+
+[node name="Background" parent="." instance=ExtResource("3_dvisc")]
+layout_mode = 1
+texture = ExtResource("4_ab04i")
+
+[node name="TitleContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.141
+anchor_right = 0.5
+anchor_bottom = 0.141219
+offset_left = -358.0
+offset_top = -109.48
+offset_right = 358.0
+offset_bottom = 110.24
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="RichTextLabel" parent="TitleContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[wave amp=60.0 freq=5.0  connected=1]  [font_size=140]  TARGET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -211.0
+offset_top = -221.0
+offset_right = 199.0
+offset_bottom = 429.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(175, 298)
+theme = SubResource("Theme_xim88")
+theme_override_constants/separation = 70
+
+[node name="Start" type="Button" parent="ButtonContainer"]
+custom_minimum_size = Vector2(200, 170)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxTexture_koqhg")
+text = "PLAY"
+
+[node name="Options" type="Button" parent="ButtonContainer"]
+custom_minimum_size = Vector2(256, 170)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxTexture_8um5k")
+text = "Options"
+
+[node name="Credits" type="Button" parent="ButtonContainer"]
+custom_minimum_size = Vector2(256, 170)
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxTexture_xim88")
+text = "CREDITS"
+icon_alignment = 1
+
+[node name="CreditsPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.109
+anchor_right = 1.0
+anchor_bottom = 0.851
+offset_top = -10.52
+offset_bottom = -11.28
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cmrfp")
+
+[node name="CreditsLabel" type="Label" parent="CreditsPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -311.0
+offset_top = -376.5
+offset_right = 311.0
+offset_bottom = 376.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Thanks to MY Family for the support
+
+
+Assets USED:
+Kenney
+Pixel Frog
+Yuri Sizov
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="CreditsPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.06112
+anchor_right = 0.5
+anchor_bottom = 1.06112
+offset_left = -36.0
+offset_top = -43.0
+offset_right = 36.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(36, 36)
+icon = ExtResource("7_euk5f")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="OptionsPanel" parent="." instance=ExtResource("8_kdsd0")]
+visible = false
+custom_minimum_size = Vector2(700, 800)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -381.0
+offset_top = -449.0
+offset_right = 319.0
+offset_bottom = 351.0
+
+[node name="BackButton" type="Button" parent="OptionsPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.450649
+anchor_top = 1.039
+anchor_right = 0.553506
+anchor_bottom = 1.129
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(36, 36)
+icon = ExtResource("7_euk5f")
+flat = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_w0mr3")
+volume_db = 3.0
+autoplay = true
+bus = &"MenuMusic"
+
+[connection signal="pressed" from="ButtonContainer/Start" to="." method="OnPlayButtonPressed"]
+[connection signal="pressed" from="ButtonContainer/Options" to="." method="OnOptionsButtonPressed"]
+[connection signal="pressed" from="ButtonContainer/Credits" to="." method="OnCreditsButtonPressed"]
+[connection signal="pressed" from="CreditsPanel/BackButton" to="." method="OnBackButtonPressed"]
+[connection signal="pressed" from="OptionsPanel/BackButton" to="." method="OnOptionsBackButtonPressed"]

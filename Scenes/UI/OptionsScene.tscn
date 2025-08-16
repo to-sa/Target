@@ -1,0 +1,113 @@
+[gd_scene load_steps=10 format=3 uid="uid://0bdkwrl6idm6"]
+
+[ext_resource type="FontFile" uid="uid://doj2imcpb52c4" path="res://Assets/Font/Kenney Future.ttf" id="1_8c6yk"]
+[ext_resource type="Texture2D" uid="uid://d27n037irqp8c" path="res://Assets/UI/Grey/Double/button_square_border.png" id="2_4obyk"]
+[ext_resource type="Texture2D" uid="uid://d4esfq5gb1r28" path="res://Assets/UI/Grey/Default/button_rectangle_flat.png" id="3_8c6yk"]
+[ext_resource type="PackedScene" uid="uid://bd2615oxkw4jx" path="res://Scenes/UI/VolumeSlider.tscn" id="3_dqi4f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rrcx7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fh7cp"]
+texture = ExtResource("2_4obyk")
+
+[sub_resource type="Theme" id="Theme_cmrfp"]
+default_font = ExtResource("1_8c6yk")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 8
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 30
+Label/fonts/font = ExtResource("1_8c6yk")
+Label/styles/normal = SubResource("StyleBoxEmpty_rrcx7")
+Panel/styles/panel = SubResource("StyleBoxTexture_fh7cp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4obyk"]
+texture = ExtResource("3_8c6yk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7467j"]
+
+[node name="OptionsPanel" type="Panel"]
+anchors_preset = -1
+anchor_left = 0.159
+anchor_top = 0.249
+anchor_right = 0.829
+anchor_bottom = 0.786
+offset_left = -93.112
+offset_top = -124.72
+offset_right = 29.3279
+offset_bottom = 38.92
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+theme = SubResource("Theme_cmrfp")
+theme_override_styles/panel = SubResource("StyleBoxTexture_4obyk")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -172.0
+offset_right = 162.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.6, 1.6)
+pivot_offset = Vector2(162, 172)
+theme_override_styles/panel = SubResource("StyleBoxTexture_7467j")
+
+[node name="Contents" type="VBoxContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MasterLabel" type="Label" parent="PanelContainer/Contents"]
+layout_mode = 2
+text = "Master volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Master" parent="PanelContainer/Contents" instance=ExtResource("3_dqi4f")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+BusName = "Master"
+
+[node name="MenuMusicLabel" type="Label" parent="PanelContainer/Contents"]
+layout_mode = 2
+text = "Menu MUSIC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" parent="PanelContainer/Contents" instance=ExtResource("3_dqi4f")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+BusName = "MenuMusic"
+
+[node name="GameMusicLabel" type="Label" parent="PanelContainer/Contents"]
+layout_mode = 2
+text = "Game Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameMusic" parent="PanelContainer/Contents" instance=ExtResource("3_dqi4f")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+BusName = "GameMusic"
+
+[node name="SFXLabel" type="Label" parent="PanelContainer/Contents"]
+layout_mode = 2
+text = "Sound Effects"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFX" parent="PanelContainer/Contents" instance=ExtResource("3_dqi4f")]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+BusName = "SFX"
