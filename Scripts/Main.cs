@@ -16,17 +16,22 @@ public partial class Main : Control
     PackedScene HomeScreen = GD.Load<PackedScene>("res://Scenes/UI/MainMenu.tscn");
     PackedScene Axe = GD.Load<PackedScene>("res://Weapons/Axe.tscn");
 
+    // Entities
     private Player _player;
-    private Timer _mobTimer;
     private PathFollow2D _mobPathFollow;
     private Path2D _mobPath;
+    private Timer _mobTimer;
+   
+   // Weapons
+    private Sword _sword;
+    private Shield _shield;
+    private Timer _axeTimer;
+   
+    // UI
     private Panel _gameOverScreen;
-    private Label _highScoreLabel;
-    private Area2D _sword;
-    private Area2D _shield;
     private Panel _optionsPanel;
     private TextureRect _background;
-    private Timer _axeTimer;
+    private Label _highScoreLabel;
 
     public override void _EnterTree()
     {
@@ -35,8 +40,10 @@ public partial class Main : Control
         _mobPathFollow = GetNode<PathFollow2D>("%SpawnLocation");
         _mobPath = GetNode<Path2D>("Mobs/MobPath");
         _gameOverScreen = GetNode<Panel>("%GameOver");
-        _sword = GetNode<Area2D>("%Sword");
-        _shield = GetNode<Area2D>("%Shield");
+
+        _sword = GetNode<Sword>("%Sword");
+        _shield = GetNode<Shield>("%Shield");
+
         _optionsPanel = GetNode<Panel>("HUD/OptionsPanel");
         _highScoreLabel = GetNode<Label>("%HighScoreLabel");
         _background = GetNode<TextureRect>("Background");
@@ -71,7 +78,6 @@ public partial class Main : Control
         if (HUD.Instance.Score == 10)
         {
             _mobTimer.WaitTime = 1.3f;
-            SoundManager.Instance.MusicOne.Play();
         }
 
         if (HUD.Instance.Score == 15)
@@ -84,6 +90,8 @@ public partial class Main : Control
         {
             _mobTimer.WaitTime = 1.0f;
             _background.Texture = Backgrounds[2];
+            _sword.Speed = 220;
+            _shield.Speed = 220;
         }
 
         if (HUD.Instance.Score == 60)
@@ -92,10 +100,6 @@ public partial class Main : Control
             _sword.Show();
             _sword.CollisionMask = 1;
             _axeTimer.WaitTime = 1.2f;
-
-            SoundManager.Instance.MusicTwo.Play();
-            SoundManager.Instance.MusicOne.Stop();
-
         }
 
         if (HUD.Instance.Score == 90)
@@ -111,6 +115,8 @@ public partial class Main : Control
             _background.Texture = Backgrounds[1];
             _mobTimer.WaitTime = 0.45f;
             _player.fireRate.WaitTime = 0.25;
+            _sword.Speed = 220;
+            _shield.Speed = 220;
         }
 
          if (HUD.Instance.Score == 250)

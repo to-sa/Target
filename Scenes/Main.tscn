@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://dpeyq71n36xji"]
+[gd_scene load_steps=54 format=4 uid="uid://dpeyq71n36xji"]
 
 [ext_resource type="Script" uid="uid://buoc1enri5nex" path="res://Scripts/Main.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0vg8bbh0s2s" path="res://Player/player.tscn" id="1_r150o"]
@@ -20,9 +20,13 @@
 [ext_resource type="PackedScene" uid="uid://b7pbyyccdglal" path="res://Weapons/Shield.tscn" id="11_1p5hy"]
 [ext_resource type="FontFile" uid="uid://doj2imcpb52c4" path="res://Assets/Font/Kenney Future.ttf" id="11_4kpch"]
 [ext_resource type="PackedScene" uid="uid://b2v4vusylgxha" path="res://Scenes/UI/Heart.tscn" id="11_grg3l"]
+[ext_resource type="AudioStream" uid="uid://gr2yhedxj67r" path="res://Assets/Sounds/Music/OutOnTheSea.wav" id="16_u7mjy"]
 [ext_resource type="Texture2D" uid="uid://cmomfdodshakt" path="res://Scenes/UI/UIAssets/Extra/Double/icon_repeat_outline.png" id="17_2w5on"]
+[ext_resource type="AudioStream" uid="uid://craqyqo30inkf" path="res://Assets/Sounds/Music/SlowDrummer.wav" id="17_4yxf6"]
 [ext_resource type="AudioStream" uid="uid://ckdfnocwmyi0h" path="res://Assets/Sounds/Music/Slow.wav" id="17_u7mjy"]
 [ext_resource type="Texture2D" uid="uid://ox2vqujmd47x" path="res://Scenes/UI/UIAssets/Extra/Double/icon_play_outline.png" id="18_346fj"]
+[ext_resource type="AudioStream" uid="uid://dykitknsodoli" path="res://Assets/Sounds/Music/staring at the ceiling.wav" id="18_qta6b"]
+[ext_resource type="AudioStream" uid="uid://b7dse4k7rii07" path="res://Assets/Sounds/Music/StaringAtWall.wav" id="19_x3rx7"]
 [ext_resource type="Texture2D" uid="uid://bc3pnamo8blhj" path="res://Scenes/UI/UIAssets/Grey/Double/button_rectangle_border.png" id="20_jyqft"]
 [ext_resource type="PackedScene" uid="uid://0bdkwrl6idm6" path="res://Scenes/UI/OptionsScene.tscn" id="20_sxkr1"]
 [ext_resource type="Texture2D" uid="uid://ckv13v1aeywkb" path="res://Scenes/UI/UIAssets/Grey/Double/check_round_grey_circle.png" id="21_fq0cl"]
@@ -54,6 +58,15 @@ stream_0/stream = SubResource("AudioStreamOggVorbis_c5snn")
 stream_1/stream = ExtResource("6_bmxlf")
 stream_2/stream = ExtResource("7_grg3l")
 stream_3/stream = SubResource("AudioStreamOggVorbis_xvtyr")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_c5snn"]
+streams_count = 6
+stream_0/stream = ExtResource("10_0sclb")
+stream_1/stream = ExtResource("17_u7mjy")
+stream_2/stream = ExtResource("16_u7mjy")
+stream_3/stream = ExtResource("17_4yxf6")
+stream_4/stream = ExtResource("18_qta6b")
+stream_5/stream = ExtResource("19_x3rx7")
 
 [sub_resource type="Curve2D" id="Curve2D_idj7w"]
 
@@ -108,23 +121,19 @@ Backgrounds = Array[Texture2D]([ExtResource("3_xvtyr"), ExtResource("4_u7mjy"), 
 [node name="Background" parent="." instance=ExtResource("3_h1m7h")]
 layout_mode = 1
 
-[node name="SoundManager" parent="." node_paths=PackedStringArray("HitSound", "MusicOne", "MusicTwo") instance=ExtResource("3_rgh2o")]
+[node name="SoundManager" parent="." node_paths=PackedStringArray("HitSound", "Music") instance=ExtResource("3_rgh2o")]
 script = ExtResource("4_v1gob")
 HitSound = NodePath("BarrelHitSound")
-MusicOne = NodePath("Fast")
-MusicTwo = NodePath("Slow")
+Music = NodePath("Music")
 
 [node name="BarrelHitSound" type="AudioStreamPlayer2D" parent="SoundManager"]
 stream = SubResource("AudioStreamRandomizer_1p5hy")
 volume_db = 20.0
 bus = &"SFX"
 
-[node name="Fast" type="AudioStreamPlayer" parent="SoundManager"]
-stream = ExtResource("10_0sclb")
-bus = &"GameMusic"
-
-[node name="Slow" type="AudioStreamPlayer" parent="SoundManager"]
-stream = ExtResource("17_u7mjy")
+[node name="Music" type="AudioStreamPlayer" parent="SoundManager"]
+stream = SubResource("AudioStreamRandomizer_c5snn")
+autoplay = true
 bus = &"GameMusic"
 
 [node name="Mobs" type="Node2D" parent="."]
@@ -345,6 +354,7 @@ scale = Vector2(1.5, 1.5)
 icon = ExtResource("21_fq0cl")
 flat = true
 
+[connection signal="finished" from="SoundManager/Music" to="SoundManager" method="OnMusicFinished"]
 [connection signal="timeout" from="PlayerPosition/AxeTimer" to="." method="OnAxeTimeout"]
 [connection signal="pressed" from="HUD/GameOver/Restart" to="." method="OnRestartPressed"]
 [connection signal="pressed" from="HUD/GameOver/HomeScreen" to="." method="OnHomeScreenPressed"]
