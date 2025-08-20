@@ -91,16 +91,16 @@ public partial class Main : Control
             _mobTimer.WaitTime = 0.8f;
             _sword.Show();
             _sword.CollisionMask = 1;
-            _axeTimer.WaitTime = 1.7f;
+            _axeTimer.WaitTime = 1.2f;
 
-            SoundManager.Instance.MusicOne.Stop();
             SoundManager.Instance.MusicTwo.Play();
+            SoundManager.Instance.MusicOne.Stop();
 
         }
 
-        if (HUD.Instance.Score == 100)
+        if (HUD.Instance.Score == 90)
         {
-            _mobTimer.WaitTime = 0.6f;
+            _mobTimer.WaitTime = 0.7f;
             _shield.Show();
             _shield.CollisionMask = 1;
             _background.Texture = Backgrounds[4];
@@ -109,9 +109,17 @@ public partial class Main : Control
         if (HUD.Instance.Score == 200)
         {
             _background.Texture = Backgrounds[1];
-            _mobTimer.WaitTime = 0.4f;
-
+            _mobTimer.WaitTime = 0.45f;
+            _player.fireRate.WaitTime = 0.25;
         }
+
+         if (HUD.Instance.Score == 250)
+        {
+            _background.Texture = Backgrounds[3];
+            _mobTimer.WaitTime = 0.30f;
+            _player.fireRate.WaitTime = 0.15;
+        }
+
 
     }
 

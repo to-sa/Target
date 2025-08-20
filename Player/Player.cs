@@ -14,15 +14,15 @@ public partial class Player : Area2D
     private PackedScene _arrowScene = GD.Load<PackedScene>("Weapons/Arrow.tscn");
 
     private Marker2D _spawnPosition;
-    private Timer _fireRate;
     private Timer _takeDamageTimer;
     private AnimatedSprite2D _weaponSprite;
     private AudioStreamPlayer2D _drawSound;
 
-    private bool _canFire = true;
-    public bool CanTakeDamage = true;
     private Tween _tween;
+    private bool _canFire = true;
 
+    public Timer fireRate;
+    public bool CanTakeDamage = true;
     public int health = 3;
 
     public override void _Ready()
@@ -34,8 +34,8 @@ public partial class Player : Area2D
 
         _drawSound = GetNode<AudioStreamPlayer2D>("FireSound");
 
-        _fireRate = GetNode<Timer>("FireRate");
-        _fireRate.Timeout += CanFireTimeout;
+        fireRate = GetNode<Timer>("FireRate");
+        fireRate.Timeout += CanFireTimeout;
 
         _takeDamageTimer = GetNode<Timer>("TakeDamageTimer");
     }
@@ -63,7 +63,7 @@ public partial class Player : Area2D
         _drawSound.Play();
 
         _canFire = false;
-        _fireRate.Start();
+        fireRate.Start();
     }
 
     private void CanFireTimeout()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bpd1f1w75jgmo"]
 
-[ext_resource type="Texture2D" uid="uid://coij15rtoomko" path="res://Assets/tilesheet.png" id="1_743re"]
+[ext_resource type="Texture2D" uid="uid://coij15rtoomko" path="res://Scenes/Barrel/tilesheet.png" id="1_743re"]
 [ext_resource type="Script" uid="uid://bcwqy1o4k45b6" path="res://Scenes/Barrel/Barrel.cs" id="1_iifeo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqfqo"]

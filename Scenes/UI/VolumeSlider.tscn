@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bd2615oxkw4jx"]
 
-[ext_resource type="Script" uid="uid://b0ae1fibtdw1c" path="res://Scripts/VolumeSlider.cs" id="1_qyomt"]
+[ext_resource type="Script" uid="uid://b0ae1fibtdw1c" path="res://Scenes/UI/VolumeSlider.cs" id="1_qyomt"]
 
 [node name="VolumeSlider" type="HSlider"]
 offset_right = 16.0

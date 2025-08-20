@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7pbyyccdglal"]
 
-[ext_resource type="Texture2D" uid="uid://b55o1qc7rmg7c" path="res://Assets/Items/shield_curved.png" id="1_jydmh"]
+[ext_resource type="Texture2D" uid="uid://b55o1qc7rmg7c" path="res://Weapons/Items/shield_curved.png" id="1_jydmh"]
 [ext_resource type="Script" uid="uid://b5j52d04lsyfg" path="res://Weapons/Shield.cs" id="1_mthq3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mthq3"]

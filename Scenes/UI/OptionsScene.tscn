@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://0bdkwrl6idm6"]
 
 [ext_resource type="FontFile" uid="uid://doj2imcpb52c4" path="res://Assets/Font/Kenney Future.ttf" id="1_8c6yk"]
-[ext_resource type="Texture2D" uid="uid://d27n037irqp8c" path="res://Assets/UI/Grey/Double/button_square_border.png" id="2_4obyk"]
-[ext_resource type="Texture2D" uid="uid://d4esfq5gb1r28" path="res://Assets/UI/Grey/Default/button_rectangle_flat.png" id="3_8c6yk"]
+[ext_resource type="Texture2D" uid="uid://d27n037irqp8c" path="res://Scenes/UI/UIAssets/Grey/Double/button_square_border.png" id="2_4obyk"]
+[ext_resource type="Texture2D" uid="uid://d4esfq5gb1r28" path="res://Scenes/UI/UIAssets/Grey/Default/button_rectangle_flat.png" id="3_8c6yk"]
 [ext_resource type="PackedScene" uid="uid://bd2615oxkw4jx" path="res://Scenes/UI/VolumeSlider.tscn" id="3_dqi4f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rrcx7"]
